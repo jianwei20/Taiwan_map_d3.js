@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: #fff;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#398fd6+5,7db9e8+76 */
+        background: #398fd6;
+        /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #398fd6 5%, #7db9e8 76%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #398fd6 5%, #7db9e8 76%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #398fd6 5%, #7db9e8 76%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#398fd6', endColorstr='#7db9e8', GradientType=1);
+
+        /* IE6-9 fallback on horizontal gradient */
+    }
+    .toolTip {
+        position: absolute;
+        text-align: center;
+        width: 60px;
+        height: 50px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: steelblue;
+        color: white;
+        border: 0px;
+        border-radius: 3px;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+    .subunit-boundary {
+        fill: none;
+        stroke: #227700;
+        stroke-dasharray: 5, 0;
+        stroke-linejoin: round;
+    }
+    svg {
+        background: #fff;
+        opacity:1;
+        display: block;
+        margin: auto;
+    }
+</style>
+
+<body>
+    <script type="text/javascript">
+        var data96 = [{
+                "region": "新北市",
+                "number": 386,
+                "pepople_number": 3767644,
+                "avege_number": 9761,
+                "sales": 2894712
+
+            },
+            {
+                "region": "臺北市",
+                "number": 680,
+                "pepople_number": 2608522,
+                "avege_number": 3836,
+                "sales": 14472051
+
+            },
+            {
+                "region": "桃園市",
+                "number": 219,
+                "pepople_number": 1916420,
+                "avege_number": 8751,
+                "sales": 1539439
+
+            },
+            {
+                "region": "台中市",
+                "number": 436,
+                "pepople_number": 2583736,
+                "avege_number": 5926,
+                "sales": 2581715
+
+            },
+            {
+                "region": "台南市",
+                "number": 251,
+                "pepople_number": 1855648,
+                "avege_number": 7393,
+                "sales": 4723968
+
+            },
+            {
+                "region": "高雄市",
+                "number": 314,
+                "pepople_number": 2743372,
+                "avege_number": 8737,
+                "sales": 1885188
+
+            },
+            {
+                "region": "宜蘭縣",
+                "number": 55,
+                "pepople_number": 456836,
+                "avege_number": 8306,
+                "sales": 242589
+
+            },
+            {
+                "region": "新竹縣",
+                "number": 67,
+                "pepople_number": 489986,
+                "avege_number": 7313,
+                "sales": 186569
+
+            },
+            {
+                "region": "苗栗縣",
+                "number": 65,
+                "pepople_number": 555198,
+                "avege_number": 8542,
+                "sales": 264049
+
+            },
+            {
+                "region": "彰化縣",
+                "number": 120,
+                "pepople_number": 1302683,
+                "avege_number": 10856,
+                "sales": 712780
+
+            },
+            {
+                "region": "南投縣",
+                "number": 68,
+                "pepople_number": 529436,
+                "avege_number": 7786,
+                "sales": 263710
+
+            },
+            {
+                "region": "雲林縣",
+                "number": 55,
+                "pepople_number": 719615,
+                "avege_number": 13084,
+                "sales": 237724
+
+            },
+            {
+                "region": "嘉義縣",
+                "number": 50,
+                "pepople_number": 275766,
+                "avege_number": 5515,
+                "sales": 134398
+
+            },
+            {
+                "region": "屏東縣",
+                "number": 77,
+                "pepople_number": 882849,
+                "avege_number": 11466,
+                "sales": 263145
+
+            },
+            {
+                "region": "連江縣",
+                "number": 0,
+                "pepople_number": 9843,
+                "avege_number": 0,
+                "sales": 0
+            },
+            {
+                "region": "花蓮縣",
+                "number": 67,
+                "pepople_number": 340633,
+                "avege_number": 5084,
+                "sales": 213269
+
+            },
+            {
+                "region": "澎湖縣",
+                "number": 14,
+                "pepople_number": 91652,
+                "avege_number": 6547,
+                "sales": 21745
+            },
+            {
+                "region": "基隆市",
+                "number": 29,
+                "pepople_number": 387656,
+                "avege_number": 13367,
+                "sales": 112093
+            },
+            {
+                "region": "新竹市",
+                "number": 88,
+                "pepople_number": 394349,
+                "avege_number": 4481,
+                "sales": 804892
+            },
+            {
+                "region": "嘉義市",
+                "number": 69,
+                "pepople_number": 271074,
+                "avege_number": 3929,
+                "sales": 400082
+            },
+            {
+                "region": "金門縣",
+                "number": 13,
+                "pepople_number": 80654,
+                "avege_number": 6204,
+                "sales": 8503
+            }
+        ];
+
+        var density97 = {
+            "A": -4, // 台北市
+            "I": -1, //嘉義市
+            "O": 0, //新竹市
+            "C": -14, //基隆市
+            "F": -4, //新北市
+            "H": -2, //桃園市
+            "B": 0, //台中市
+            "N": 4, //彰化縣
+            "E": -2, //高雄市
+            "D": -4, //台南市
+            "W": -15, //金門縣
+            "X": 14, //澎湖縣
+            "P": 4, //雲林縣
+            "Z": 0, //連江縣
+            "J": -6, //新竹縣
+            "K": 9, //苗栗縣
+            "T": 10, //屏東縣
+            "Q": -10, //嘉義縣
+            "G": 0, //宜蘭縣
+            "M": 0, //南投縣
+            "U": 4, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density98 = {
+            "A": -7, // 台北市
+            "I": -6, //嘉義市
+            "O": -10, //新竹市
+            "C": -10, //基隆市
+            "F": -5, //新北市
+            "H": -1, //桃園市
+            "B": 0, //台中市
+            "N": 0, //彰化縣
+            "E": -2, //高雄市
+            "D": -3, //台南市
+            "W": 8, //金門縣
+            "X": 0, //澎湖縣
+            "P": 9, //雲林縣
+            "Z": 0, //連江縣
+            "J": -10, //新竹縣
+            "K": 2, //苗栗縣
+            "T": 8, //屏東縣
+            "Q": -8, //嘉義縣
+            "G": 2, //宜蘭縣
+            "M": -6, //南投縣
+            "U": -4, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density99 = {
+            "A": -8, // 台北市
+            "I": -14, //嘉義市
+            "O": -17, //新竹市
+            "C": -17, //基隆市
+            "F": -9, //新北市
+            "H": -1, //桃園市
+            "B": -3, //台中市
+            "N": -3, //彰化縣
+            "E": -2, //高雄市
+            "D": -5, //台南市
+            "W": 15, //金門縣
+            "X": 0, //澎湖縣
+            "P": 9, //雲林縣
+            "Z": 0, //連江縣
+            "J": -19, //新竹縣
+            "K": -5, //苗栗縣
+            "T": 1, //屏東縣
+            "Q": -6, //嘉義縣
+            "G": -5, //宜蘭縣
+            "M": -6, //南投縣
+            "U": -12, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density100 = {
+            "A": -10, // 台北市
+            "I": -17, //嘉義市
+            "O": -17, //新竹市
+            "C": -31, //基隆市
+            "F": -5, //新北市
+            "H": -7, //桃園市
+            "B": -5, //台中市
+            "N": -1, //彰化縣
+            "E": -2, //高雄市
+            "D": -7, //台南市
+            "W": 8, //金門縣
+            "X": 0, //澎湖縣
+            "P": 13, //雲林縣
+            "Z": 0, //連江縣
+            "J": -18, //新竹縣
+            "K": -9, //苗栗縣
+            "T": -4, //屏東縣
+            "Q": -10, //嘉義縣
+            "G": -13, //宜蘭縣
+            "M": -7, //南投縣
+            "U": -12, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density101 = {
+            "A": -14, // 台北市
+            "I": -22, //嘉義市
+            "O": -17, //新竹市
+            "C": -34, //基隆市
+            "F": -8, //新北市
+            "H": -4, //桃園市
+            "B": -12, //台中市
+            "N": -1, //彰化縣
+            "E": -6, //高雄市
+            "D": -6, //台南市
+            "W": 31, //金門縣
+            "X": -7, //澎湖縣
+            "P": 13, //雲林縣
+            "Z": 0, //連江縣
+            "J": -25, //新竹縣
+            "K": -8, //苗栗縣
+            "T": -6, //屏東縣
+            "Q": -14, //嘉義縣
+            "G": -13, //宜蘭縣
+            "M": -10, //南投縣
+            "U": -13, //花蓮縣
+            "V": 0 //台東縣
+        };
+        var density102 = {
+            "A": -26, // 台北市
+            "I": -23, //嘉義市
+            "O": -38, //新竹市
+            "C": -48, //基隆市
+            "F": -27, //新北市
+            "H": -26, //桃園市
+            "B": -31, //台中市
+            "N": -29, //彰化縣
+            "E": -19, //高雄市
+            "D": -14, //台南市
+            "W": 8, //金門縣
+            "X": -29, //澎湖縣
+            "P": -16, //雲林縣
+            "Z": 0, //連江縣
+            "J": -43, //新竹縣
+            "K": -23, //苗栗縣
+            "T": -27, //屏東縣
+            "Q": -36, //嘉義縣
+            "G": -24, //宜蘭縣
+            "M": -41, //南投縣
+            "U": -27, //花蓮縣
+            "V": -41 //台東縣
+        };
+        var density103 = {
+            "A": -30, // 台北市
+            "I": -23, //嘉義市
+            "O": -42, //新竹市
+            "C": -45, //基隆市
+            "F": -28, //新北市
+            "H": -33, //桃園市
+            "B": -31, //台中市
+            "N": -33, //彰化縣
+            "E": -22, //高雄市
+            "D": -18, //台南市
+            "W": 15, //金門縣
+            "X": -29, //澎湖縣
+            "P": -20, //雲林縣
+            "Z": 0, //連江縣
+            "J": -39, //新竹縣
+            "K": -28, //苗栗縣
+            "T": -27, //屏東縣
+            "Q": -40, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -34, //花蓮縣
+            "V": -44 //台東縣
+        };
+        var density104 = {
+            "A": -30, // 台北市
+            "I": -20, //嘉義市
+            "O": -40, //新竹市
+            "C": -45, //基隆市
+            "F": -33, //新北市
+            "H": -33, //桃園市
+            "B": -34, //台中市
+            "N": -32, //彰化縣
+            "E": -21, //高雄市
+            "D": -17, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -27, //雲林縣
+            "Z": 0, //連江縣
+            "J": -39, //新竹縣
+            "K": -31, //苗栗縣
+            "T": -23, //屏東縣
+            "Q": -42, //嘉義縣
+            "G": -27, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -36, //花蓮縣
+            "V": -48 //台東縣
+        };
+        var density105 = {
+            "A": -32, // 台北市
+            "I": -22, //嘉義市
+            "O": -44, //新竹市
+            "C": -41, //基隆市
+            "F": -35, //新北市
+            "H": -33, //桃園市
+            "B": -34, //台中市
+            "N": -32, //彰化縣
+            "E": -25, //高雄市
+            "D": -19, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -29, //雲林縣
+            "Z": 0, //連江縣
+            "J": -33, //新竹縣
+            "K": -25, //苗栗縣
+            "T": -25, //屏東縣
+            "Q": -48, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -36, //花蓮縣
+            "V": -52 //台東縣
+        };
+        var density106 = {
+            "A": -35, // 台北市
+            "I": -25, //嘉義市
+            "O": -43, //新竹市
+            "C": -38, //基隆市
+            "F": -39, //新北市
+            "H": -34, //桃園市
+            "B": -35, //台中市
+            "N": -37, //彰化縣
+            "E": -25, //高雄市
+            "D": -20, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -31, //雲林縣
+            "Z": 0, //連江縣
+            "J": -28, //新竹縣
+            "K": -29, //苗栗縣
+            "T": -26, //屏東縣
+            "Q": -50, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -40, //花蓮縣
+            "V": -44 //台東縣
+        };
+    </script>
+
+
+</body>
+<script>
+    jQuery(function () {
+        var width = 800,
+            height = 600;
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var projection = d3.geo.mercator()
+            .center([122.5, 24])
+            .scale(6000);
+
+        var path = d3.geo.path()
+            .projection(projection);
+
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+        //畫出起始圖
+        d3.json("taiwan.json", function (error, topology) {
+            var g = svg.append("g");
+            // 縣市/行政區界線
+            d3.select("svg").append("path").datum(
+                topojson.mesh(topology,
+                    topology.objects["County_MOI_1060525"],
+                    function (a,
+                        b) {
+                        return a !== b;
+                    })).attr("d", path).attr("class", "subunit-boundary");
+
+            d3.select("g").selectAll("path")
+                .data(topojson.feature(topology, topology.objects.County_MOI_1060525).features)
+                .enter()
+                .append("path")
+                .attr("class", "state-path")
+                .attr("d", path)
+                //.transition()
+                //.duration(2000)
+                .attr({
+                    d: path,
+                    name: function (d) {
+                        return d.properties["COUNTYNAME"];
+                    },
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-15, 14]).range([0, 5]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ]);
+                        return color(density97[d.properties.COUNTYID]);
+                    },
+                    stroke: "black"
+                }).attr('stroke-width', "1")
+                .on("mouseover", function (d) {
+                    //d3.select(this).attr("fill", "#227700");
+                    var centroid = path.centroid(d);
+                    var x = centroid[0] + 300;
+                    var y = centroid[1];
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    tooltip.html(d.properties.COUNTYNAME + "<br>" + "andy" +
+                            "<br>" + "aaaa")
+                        .style("left", d3.event.pageX + "px")
+                        .style("top", d3.event.pageY + "px");
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    //d3.selectAll("rect","bar")
+                    // .remove();
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+            //帶入不同年代的資料
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-10, 9]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density98[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(4000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-17, 15]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density99[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(8000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-31, 13]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density100[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(12000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-34, 31]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density101[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(16000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-48, 8]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density102[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(20000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-46, 15]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density103[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(24000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-48, 0]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ]);
+                        return color(density104[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(28000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-52, 0]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density105[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(32000)
+                .duration(4000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear().domain([-50, 0]).range([
+                            "#FFFFFF",
+                            "#FF0000"
+                        ])
+                        return color(density106[d.properties.COUNTYID]);
+                    }
+                });
+            //做出時間軸
+            //97
+            d3.select("g")
+                .append("rect")
+                .attr("class", "a")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .style("fill", "#FFFFFF");
+            d3.select("g")
+                .append("text")
+                .attr("class", "a97")
+                .attr("y", 565)
+                .attr("x", 20)
+                .text('97');
+            var a97 = d3.select(".a97");
+            a97.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.linear() //	both charts return the same color scale
+      .domain([-50, 0, 15])
+      .range(["red", "white","green"]);
+                            //var input = d3.scale.quantize().domain([-50, 50]).range([-10,0,10]);
+                            /*var color = d3.scale.ordinal().domain([-10,0, 10])
+                                .range([
+                                    "#FF0000",
+                                    "FFFFFFF",
+                                    "#33FF33"
+                                ])
+                            return color(input(density97[d.properties.COUNTYID]));*/
+                            return input(density97[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            var a = d3.select(".a");
+            a.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-50, 50])
+                                .range([
+                                    "#FFFFFF",
+                                    "#FF0000"
+                                ])
+                            return color(density97[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //98
+            d3.select("g")
+                .append("rect")
+                .attr("class", "b")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 60)
+                .style("opacity", 0)
+                .style("fill", "#FF0000")
+                .transition()
+                .duration(4000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "b98")
+                .attr("y", 565)
+                .attr("x", 80)
+                .text('98')
+                .style("opacity", 0)
+                .transition()
+                .duration(4000)
+                .style("opacity", 1);
+            var b98 = d3.select(".b98");
+            b98.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density98[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var b = d3.select(".b");
+            b.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density98[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //99
+            d3.select("g")
+                .append("rect")
+                .attr("class", "c")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 120)
+                .style("opacity", 0)
+                .style("fill", "#FFFFFF")
+                .transition()
+                .duration(4000)
+                .delay(4000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "c99")
+                .attr("y", 565)
+                .attr("x", 140)
+                .text('99')
+                .style("opacity", 0)
+                .transition()
+                .delay(4000)
+                .duration(4000)
+                .style("opacity", 1);
+            var c99 = d3.select(".c99");
+            c99.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density99[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var c = d3.select(".c");
+            c.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density99[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //100
+            d3.select("g")
+                .append("rect")
+                .attr("class", "d")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 180)
+                .style("opacity", 0)
+                .style("fill", "#FF0000")
+                .transition()
+                .duration(4000)
+                .delay(8000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "d100")
+                .attr("y", 565)
+                .attr("x", 198)
+                .text('100')
+                .style("opacity", 0)
+                .transition()
+                .delay(8000)
+                .duration(4000)
+                .style("opacity", 1);
+            var d100 = d3.select(".d100");
+            d100.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density100[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var d = d3.select(".d");
+            d.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density100[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //101
+            d3.select("g")
+                .append("rect")
+                .attr("class", "e")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 240)
+                .style("opacity", 0)
+                .style("fill", "#FFFFFF")
+                .transition()
+                .duration(4000)
+                .delay(12000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "e101")
+                .attr("y", 565)
+                .attr("x", 258)
+                .text('101')
+                .style("opacity", 0)
+                .transition()
+                .delay(12000)
+                .duration(4000)
+                .style("opacity", 1);
+            var e101 = d3.select(".e101");
+            e101.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density101[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var e = d3.select(".e");
+            d.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density101[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //102
+            d3.select("g")
+                .append("rect")
+                .attr("class", "f")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 300)
+                .style("opacity", 0)
+                .style("fill", "#FF0000")
+                .transition()
+                .duration(4000)
+                .delay(16000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "f102")
+                .attr("y", 565)
+                .attr("x", 318)
+                .text('102')
+                .style("opacity", 0)
+                .transition()
+                .delay(16000)
+                .duration(4000)
+                .style("opacity", 1);
+            var f102 = d3.select(".f102");
+            f102.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density102[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var f = d3.select(".f");
+            f.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density102[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //103
+            d3.select("g")
+                .append("rect")
+                .attr("class", "g1")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 360)
+                .style("opacity", 0)
+                .style("fill", "#FFFFFF")
+                .transition()
+                .duration(4000)
+                .delay(20000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "g103")
+                .attr("y", 565)
+                .attr("x", 378)
+                .text('103')
+                .style("opacity", 0)
+                .transition()
+                .delay(20000)
+                .duration(4000)
+                .style("opacity", 1);
+            var g103 = d3.select(".g103");
+            g103.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density103[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var g1 = d3.select(".g1");
+            g1.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density103[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //104
+            d3.select("g")
+                .append("rect")
+                .attr("class", "h")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 420)
+                .style("opacity", 0)
+                .style("fill", "#FF0000")
+                .transition()
+                .duration(4000)
+                .delay(24000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "h104")
+                .attr("y", 565)
+                .attr("x", 438)
+                .text('104')
+                .style("opacity", 0)
+                .transition()
+                .delay(24000)
+                .duration(4000)
+                .style("opacity", 1);
+            var h104 = d3.select(".h104");
+            h104.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density104[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var h = d3.select(".h");
+            h.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density104[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //105
+            d3.select("g")
+                .append("rect")
+                .attr("class", "i")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 480)
+                .style("opacity", 0)
+                .style("fill", "#FFFFFF")
+                .transition()
+                .duration(4000)
+                .delay(28000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "i105")
+                .attr("y", 565)
+                .attr("x", 498)
+                .text('105')
+                .style("opacity", 0)
+                .transition()
+                .delay(28000)
+                .duration(4000)
+                .style("opacity", 1);
+            var i105 = d3.select(".i105");
+            i105.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.linear() //	both charts return the same color scale
+      .domain([-50, 0, 15])
+      .range(["red", "white","green"]);
+                            /*var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density105[d.properties.COUNTYID]));*/
+                            return input(density105[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            var i = d3.select(".i");
+            i.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-52, 0])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density105[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+            //106
+            d3.select("g")
+                .append("rect")
+                .attr("class", "j")
+                .attr("width", 60)
+                .attr("height", 20)
+                .attr("y", 550)
+                .attr("x", 540)
+                .style("opacity", 0)
+                .style("fill", "#FF0000")
+                .transition()
+                .duration(4000)
+                .delay(32000)
+                .style("opacity", 1);
+            d3.select("g")
+                .append("text")
+                .attr("class", "j106")
+                .attr("y", 565)
+                .attr("x", 558)
+                .text('106')
+                .style("opacity", 0)
+                .transition()
+                .delay(32000)
+                .duration(4000)
+                .style("opacity", 1);
+            var j106 = d3.select(".j106");
+            j106.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(2000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var input = d3.scale.quantize().domain([-50, 50]).range([0,
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20
+                            ]);
+                            var color = d3.scale.linear().domain([0, 20])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(input(density106[d.properties.COUNTYID]));
+                        }
+                    });
+            });
+            var j = d3.select(".j");
+            j.on("click", function () {
+                d3.select("g")
+                    .selectAll("path")
+                    .transition()
+                    .duration(4000)
+                    .attr({
+                        d: path,
+                        fill: function (d) {
+                            var color = d3.scale.linear().domain([-15, 14])
+                                .range([
+                                    "#FF0000",
+                                    "#08FF00"
+                                ])
+                            return color(density106[d.properties.COUNTYID]);
+                        }
+                    });
+            });
+
+        });
+    })
+</script>
+</html>

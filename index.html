@@ -3,16 +3,17 @@
 
 <head>
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="topojson.v1.min.js" charset="big5"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 </head>
 <style>
     body {
         background-color: #fff;
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#398fd6+5,7db9e8+76 */
-        background: #398fd6;
+        background: #fff;
         /* Old browsers */
         background: -moz-linear-gradient(-45deg, #398fd6 5%, #7db9e8 76%);
         /* FF3.6-15 */
@@ -21,210 +22,2469 @@
         background: linear-gradient(135deg, #398fd6 5%, #7db9e8 76%);
         /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#398fd6', endColorstr='#7db9e8', GradientType=1);
+
         /* IE6-9 fallback on horizontal gradient */
     }
-    
+
+    /*.toolTip{
+    position: absolute;
+    border: #7db9e8;
+    background: #fff;
+}*/
+
+    .toolTip {
+        position: absolute;
+        text-align: left;
+        width: 250px;
+        height: 100px;
+        padding: 5px;
+        font: 15px sans-serif;
+        background: steelblue;
+        color: white;
+        border: 0px;
+        border-radius: 3px;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        opacity: 0;
+
+    }
+
+    .slider1 {
+        width: 550px;
+        margin-left: 150px;
+    }
+
+    #slider {
+        width: 100%;
+    }
+
     .subunit-boundary {
         fill: none;
         stroke: #227700;
         stroke-dasharray: 5, 0;
         stroke-linejoin: round;
     }
+
+    span {
+        margin-right: 36px;
+    }
+
+    svg {
+        display: block;
+        margin: auto;
+    }
 </style>
 
 <body>
-    <script type="text/javascript">
-    var data = [
-  {
-    "region": "新北市",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "台北市",
-    "number": 680,
-    "pepople_number": 2608522,
-    "avege_number": 3836,
-    "sales":14472051
-  
-  },
-  {
-    "region": "桃園市",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "台中市",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "台南市",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "高雄市",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "宜蘭縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "新竹縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "苗栗縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "彰化縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "南投縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "雲林縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-  {
-    "region": "嘉義縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-{
-    "region": "屏東縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
+    <script type="text/javascript" charset="big5">
+        let data96 =  [
+       
+       [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 386,
+                       "pepople_number": 3767644,
+                       "avege_number": 9761,
+                       "sales": 2894712
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 680,
+                       "pepople_number": 2608522,
+                       "avege_number": 3836,
+                       "sales": 14472051
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 219,
+                       "pepople_number": 1916420,
+                       "avege_number": 8751,
+                       "sales": 1539439
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 436,
+                       "pepople_number": 2583736,
+                       "avege_number": 5926,
+                       "sales": 2581715
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 251,
+                       "pepople_number": 1855648,
+                       "avege_number": 7393,
+                       "sales": 4723968
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 314,
+                       "pepople_number": 2743372,
+                       "avege_number": 8737,
+                       "sales": 1885188
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 55,
+                       "pepople_number": 456836,
+                       "avege_number": 8306,
+                       "sales": 242589
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 67,
+                       "pepople_number": 489986,
+                       "avege_number": 7313,
+                       "sales": 186569
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 65,
+                       "pepople_number": 555198,
+                       "avege_number": 8542,
+                       "sales": 264049
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 120,
+                       "pepople_number": 1302683,
+                       "avege_number": 10856,
+                       "sales": 712780
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 68,
+                       "pepople_number": 529436,
+                       "avege_number": 7786,
+                       "sales": 263710
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 55,
+                       "pepople_number": 719615,
+                       "avege_number": 13084,
+                       "sales": 237724
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 50,
+                       "pepople_number": 275766,
+                       "avege_number": 5515,
+                       "sales": 134398
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 77,
+                       "pepople_number": 882849,
+                       "avege_number": 11466,
+                       "sales": 263145
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9843,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 67,
+                       "pepople_number": 340633,
+                       "avege_number": 5084,
+                       "sales": 213269
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 14,
+                       "pepople_number": 91652,
+                       "avege_number": 6547,
+                       "sales": 21745
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 29,
+                       "pepople_number": 387656,
+                       "avege_number": 13367,
+                       "sales": 112093
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 88,
+                       "pepople_number": 394349,
+                       "avege_number": 4481,
+                       "sales": 804892
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 69,
+                       "pepople_number": 271074,
+                       "avege_number": 3929,
+                       "sales": 400082
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 13,
+                       "pepople_number": 80654,
+                       "avege_number": 6204,
+                       "sales": 8503
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 13,
+                       "pepople_number": 80654,
+                       "avege_number": 6204,
+                       "sales": 8503
+                   }
+               ], 
+                  
+       [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 372,
+                       "pepople_number": 3803265,
+                       "avege_number":10224,
+                       "sales": 3803286
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 656,
+                       "pepople_number": 2603168,
+                       "avege_number": 3968,
+                       "sales": 13740974
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 215,
+                       "pepople_number": 1940421,
+                       "avege_number": 9025,
+                       "sales": 1543592
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 438,
+                       "pepople_number": 2601814,
+                       "avege_number": 5940,
+                       "sales": 2955101
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 241,
+                       "pepople_number": 1858957,
+                       "avege_number": 7714,
+                       "sales": 4911940
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 308,
+                       "pepople_number": 2748072,
+                       "avege_number": 8922,
+                       "sales": 1966088
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 55,
+                       "pepople_number": 457441,
+                       "avege_number": 8317,
+                       "sales": 266398
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 63,
+                       "pepople_number": 497396,
+                       "avege_number": 7895,
+                       "sales": 203756
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 71,
+                       "pepople_number": 555698,
+                       "avege_number": 7827,
+                       "sales": 266822
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 125,
+                       "pepople_number": 1301534,
+                       "avege_number": 10412,
+                       "sales": 692292
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 68,
+                       "pepople_number": 527794,
+                       "avege_number": 7762,
+                       "sales": 246173
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 57,
+                       "pepople_number": 717736,
+                       "avege_number": 12592,
+                       "sales": 221119
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 45,
+                       "pepople_number": 544411,
+                       "avege_number": 12098,
+                       "sales": 145940
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 85,
+                       "pepople_number": 878395,
+                       "avege_number": 10334,
+                       "sales": 285090
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 70,
+                       "pepople_number": 338845,
+                       "avege_number": 4841,
+                       "sales": 234063
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 16,
+                       "pepople_number": 92605,
+                       "avege_number": 5788,
+                       "sales": 23983
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 25,
+                       "pepople_number": 386395,
+                       "avege_number": 15456,
+                       "sales": 278903
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 88,
+                       "pepople_number": 400488,
+                       "avege_number": 4551,
+                       "sales": 788123
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 68,
+                       "pepople_number": 271787,
+                       "avege_number": 3997,
+                       "sales": 443477
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 11,
+                       "pepople_number": 83621,
+                       "avege_number": 7602,
+                       "sales": 8934
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 26,
+                       "pepople_number": 229960,
+                       "avege_number": 8845,
+                       "sales": 149545
+                   }
+               ],
+        
+       [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 372,
+                       "pepople_number": 3803265,
+                       "avege_number":10224,
+                       "sales": 3803286
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 656,
+                       "pepople_number": 2603168,
+                       "avege_number": 3968,
+                       "sales": 13740974
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 215,
+                       "pepople_number": 1940421,
+                       "avege_number": 9025,
+                       "sales": 1543592
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 438,
+                       "pepople_number": 2601814,
+                       "avege_number": 5940,
+                       "sales": 2955101
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 241,
+                       "pepople_number": 1858957,
+                       "avege_number": 7714,
+                       "sales": 4911940
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 308,
+                       "pepople_number": 2748072,
+                       "avege_number": 8922,
+                       "sales": 1966088
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 55,
+                       "pepople_number": 457441,
+                       "avege_number": 8317,
+                       "sales": 266398
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 63,
+                       "pepople_number": 497396,
+                       "avege_number": 7895,
+                       "sales": 203756
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 71,
+                       "pepople_number": 555698,
+                       "avege_number": 7827,
+                       "sales": 266822
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 125,
+                       "pepople_number": 1301534,
+                       "avege_number": 10412,
+                       "sales": 692292
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 68,
+                       "pepople_number": 527794,
+                       "avege_number": 7762,
+                       "sales": 246173
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 57,
+                       "pepople_number": 717736,
+                       "avege_number": 12592,
+                       "sales": 221119
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 45,
+                       "pepople_number": 544411,
+                       "avege_number": 12098,
+                       "sales": 145940
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 85,
+                       "pepople_number": 878395,
+                       "avege_number": 10334,
+                       "sales": 285090
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 70,
+                       "pepople_number": 338845,
+                       "avege_number": 4841,
+                       "sales": 234063
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 16,
+                       "pepople_number": 92605,
+                       "avege_number": 5788,
+                       "sales": 23983
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 25,
+                       "pepople_number": 386395,
+                       "avege_number": 15456,
+                       "sales": 278903
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 88,
+                       "pepople_number": 400488,
+                       "avege_number": 4551,
+                       "sales": 788123
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 68,
+                       "pepople_number": 271787,
+                       "avege_number": 3997,
+                       "sales": 443477
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 11,
+                       "pepople_number": 83621,
+                       "avege_number": 7602,
+                       "sales": 8934
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 26,
+                       "pepople_number": 229960,
+                       "avege_number": 8845,
+                       "sales": 149545
+                   }
+               ],
+       
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 353,
+                       "pepople_number": 3871694,
+                       "avege_number":10968,
+                       "sales": 3000549
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 629,
+                       "pepople_number": 2600141,
+                       "avege_number": 4134,
+                       "sales": 13593783
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 216,
+                       "pepople_number": 1987176,
+                       "avege_number": 9200,
+                       "sales": 1524138
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 424,
+                       "pepople_number": 2630010,
+                       "avege_number": 6203,
+                       "sales": 2802629
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 239,
+                       "pepople_number": 1862743,
+                       "avege_number": 7794,
+                       "sales": 4880223
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 309,
+                       "pepople_number": 2756008,
+                       "avege_number": 89109,
+                       "sales": 1779625
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 52,
+                       "pepople_number": 457275,
+                       "avege_number": 8794,
+                       "sales": 331143
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 54,
+                       "pepople_number": 508355,
+                       "avege_number": 9414,
+                       "sales": 238166
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 62,
+                       "pepople_number": 557018,
+                       "avege_number": 8984,
+                       "sales": 252902
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 116,
+                       "pepople_number": 1297581,
+                       "avege_number": 11186,
+                       "sales": 705278
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 64,
+                       "pepople_number": 523295,
+                       "avege_number": 8176,
+                       "sales": 293465
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 60,
+                       "pepople_number": 712928,
+                       "avege_number": 11882,
+                       "sales": 234910
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 47,
+                       "pepople_number": 540015,
+                       "avege_number": 11490,
+                       "sales": 150963
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 78,
+                       "pepople_number": 868569,
+                       "avege_number": 11136,
+                       "sales": 310981
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 59,
+                       "pepople_number": 336551,
+                       "avege_number": 5704,
+                       "sales": 249287
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 14,
+                       "pepople_number": 96294,
+                       "avege_number": 6878,
+                       "sales": 24837
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 24,
+                       "pepople_number": 382155,
+                       "avege_number": 15923,
+                       "sales": 132858
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 73,
+                       "pepople_number": 411024,
+                       "avege_number": 5630,
+                       "sales": 777507
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 59,
+                       "pepople_number": 270744,
+                       "avege_number": 4589,
+                       "sales": 425702
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 15,
+                       "pepople_number": 96357,
+                       "avege_number": 6424,
+                       "sales": 11110
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 26,
+                       "pepople_number": 229055,
+                       "avege_number": 8810,
+                       "sales": 164855
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 366,
+                       "pepople_number": 3884270,
+                       "avege_number":10613,
+                       "sales": 2734082
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 610,
+                       "pepople_number": 2625916,
+                       "avege_number": 4305,
+                       "sales": 14229904
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 203,
+                       "pepople_number": 1996142,
+                       "avege_number": 9833,
+                       "sales": 1466067
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 414,
+                       "pepople_number": 2641594,
+                       "avege_number": 6381,
+                       "sales": 2623987
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 234,
+                       "pepople_number": 1863358,
+                       "avege_number": 7963,
+                       "sales": 4810657
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 309,
+                       "pepople_number": 2754089,
+                       "avege_number": 8913,
+                       "sales": 1852072
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 48,
+                       "pepople_number": 455742,
+                       "avege_number": 9495,
+                       "sales": 306834
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 55,
+                       "pepople_number": 512390,
+                       "avege_number": 9316,
+                       "sales": 268968
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 59,
+                       "pepople_number": 557154,
+                       "avege_number": 9443,
+                       "sales": 253471
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 119,
+                       "pepople_number": 1291984,
+                       "avege_number": 10857,
+                       "sales": 669873
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 63,
+                       "pepople_number": 519478,
+                       "avege_number": 8246,
+                       "sales": 276947
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 62,
+                       "pepople_number": 708453,
+                       "avege_number": 11427,
+                       "sales": 249268
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 45,
+                       "pepople_number": 534536,
+                       "avege_number": 11879,
+                       "sales": 157912
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 74,
+                       "pepople_number": 859451,
+                       "avege_number": 11614,
+                       "sales": 288499
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 59,
+                       "pepople_number": 334327,
+                       "avege_number": 5667,
+                       "sales": 267521
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 14,
+                       "pepople_number": 96378,
+                       "avege_number": 6884,
+                       "sales": 26775
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 20,
+                       "pepople_number": 378078,
+                       "avege_number": 18904,
+                       "sales": 97590
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 73,
+                       "pepople_number": 415048,
+                       "avege_number": 5686,
+                       "sales": 722663
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 57,
+                       "pepople_number": 269745,
+                       "avege_number": 4732,
+                       "sales": 373696
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 14,
+                       "pepople_number": 102768,
+                       "avege_number": 7341,
+                       "sales": 12423
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 26,
+                       "pepople_number": 226594,
+                       "avege_number": 8715,
+                       "sales": 147598
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 354,
+                       "pepople_number": 3901569,
+                       "avege_number":11021,
+                       "sales": 3062983
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 588,
+                       "pepople_number": 2643717,
+                       "avege_number": 4496,
+                       "sales": 13588708
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 211,
+                       "pepople_number": 2011092,
+                       "avege_number": 9531,
+                       "sales": 1385918
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 384,
+                       "pepople_number": 2657298,
+                       "avege_number": 6922,
+                       "sales": 2498404
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 237,
+                       "pepople_number": 1864752,
+                       "avege_number": 7868,
+                       "sales": 4690815
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 295,
+                       "pepople_number": 2754818,
+                       "avege_number": 9338,
+                       "sales": 1688368
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 48,
+                       "pepople_number": 454864,
+                       "avege_number": 9476,
+                       "sales": 269991
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 50,
+                       "pepople_number": 517985,
+                       "avege_number": 10360,
+                       "sales": 212306
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 60,
+                       "pepople_number": 558049,
+                       "avege_number": 9301,
+                       "sales": 240145
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 119,
+                       "pepople_number": 1287098,
+                       "avege_number": 10816,
+                       "sales": 616108
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 61,
+                       "pepople_number": 516300,
+                       "avege_number": 8464,
+                       "sales": 267712
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 62,
+                       "pepople_number": 705186,
+                       "avege_number": 11374,
+                       "sales": 264102
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 43,
+                       "pepople_number": 53004,
+                       "avege_number": 12326,
+                       "sales": 151303
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 72,
+                       "pepople_number": 852395,
+                       "avege_number": 11839,
+                       "sales": 266848
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 58,
+                       "pepople_number": 332443,
+                       "avege_number": 5732,
+                       "sales": 262516
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 13,
+                       "pepople_number": 97899,
+                       "avege_number": 7531,
+                       "sales": 25318
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 19,
+                       "pepople_number": 374876,
+                       "avege_number": 19730,
+                       "sales": 103051
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 73,
+                       "pepople_number": 419340,
+                       "avege_number": 5744,
+                       "sales": 673210
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 54,
+                       "pepople_number": 269241,
+                       "avege_number": 4986,
+                       "sales": 361716
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 17,
+                       "pepople_number": 111742,
+                       "avege_number": 6573,
+                       "sales": 10281
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 27,
+                       "pepople_number": 224433,
+                       "avege_number": 8312,
+                       "sales": 159871
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 281,
+                       "pepople_number": 3922873,
+                       "avege_number":13960,
+                       "sales": 2512483
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 504,
+                       "pepople_number": 2660879,
+                       "avege_number": 5280,
+                       "sales": 11249276
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 161,
+                       "pepople_number": 2028546,
+                       "avege_number": 12600,
+                       "sales": 803485
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 299,
+                       "pepople_number": 2678984,
+                       "avege_number": 8960,
+                       "sales": 1659495
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 215,
+                       "pepople_number": 1869520,
+                       "avege_number": 8695,
+                       "sales": 4138608
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 253,
+                       "pepople_number": 2759861,
+                       "avege_number": 10909,
+                       "sales": 1449681
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 42,
+                       "pepople_number": 455239,
+                       "avege_number": 10839,
+                       "sales": 181412
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 38,
+                       "pepople_number": 525333,
+                       "avege_number": 13825,
+                       "sales": 174274
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 50,
+                       "pepople_number": 560397,
+                       "avege_number": 11208,
+                       "sales": 235525
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 85,
+                       "pepople_number": 1285652,
+                       "avege_number": 15125,
+                       "sales": 434145
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 40,
+                       "pepople_number": 514047,
+                       "avege_number": 12851,
+                       "sales": 112673
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 49,
+                       "pepople_number": 703145,
+                       "avege_number": 15286,
+                       "sales": 142326
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 32,
+                       "pepople_number": 526341,
+                       "avege_number": 16448,
+                       "sales": 104631
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 56,
+                       "pepople_number": 847505,
+                       "avege_number": 15134,
+                       "sales": 148227
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 49,
+                       "pepople_number": 331312,
+                       "avege_number": 6761,
+                       "sales": 206002
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 10,
+                       "pepople_number": 99573,
+                       "avege_number": 9957,
+                       "sales": 18807
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 15,
+                       "pepople_number": 372926,
+                       "avege_number": 24862,
+                       "sales": 106049
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 55,
+                       "pepople_number": 423817,
+                       "avege_number": 7706,
+                       "sales": 524873
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 53,
+                       "pepople_number": 269059,
+                       "avege_number": 5077,
+                       "sales": 336754
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 14,
+                       "pepople_number": 119503,
+                       "avege_number": 8536,
+                       "sales": 18245
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 16,
+                       "pepople_number": 223236,
+                       "avege_number": 13952,
+                       "sales": 92953
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 276,
+                       "pepople_number": 3931441,
+                       "avege_number":14244,
+                       "sales": 2358411
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 476,
+                       "pepople_number": 2673895,
+                       "avege_number": 5617,
+                       "sales": 11186222
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 146,
+                       "pepople_number": 2041692,
+                       "avege_number": 13984,
+                       "sales": 714019
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 300,
+                       "pepople_number": 2694934,
+                       "avege_number": 8983,
+                       "sales": 1545833
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 207,
+                       "pepople_number": 1869607,
+                       "avege_number": 7032,
+                       "sales": 3916620
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 245,
+                       "pepople_number": 2727636,
+                       "avege_number": 11256,
+                       "sales": 1366869
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 43,
+                       "pepople_number": 455466,
+                       "avege_number": 10592,
+                       "sales": 120495
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 41,
+                       "pepople_number":532056,
+                       "avege_number": 12977,
+                       "sales": 170729
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 47,
+                       "pepople_number": 561424,
+                       "avege_number": 11945,
+                       "sales": 258663
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 80,
+                       "pepople_number": 1280346,
+                       "avege_number": 16004,
+                       "sales": 487857
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 37,
+                       "pepople_number": 510925,
+                       "avege_number": 13809,
+                       "sales": 104427
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 44,
+                       "pepople_number": 700401,
+                       "avege_number": 15918,
+                       "sales": 130051
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 30,
+                       "pepople_number": 521922,
+                       "avege_number": 17397,
+                       "sales": 92579
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 56,
+                       "pepople_number": 842712,
+                       "avege_number": 15048,
+                       "sales": 147258
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 44,
+                       "pepople_number": 330770,
+                       "avege_number": 7518,
+                       "sales": 184772
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 10,
+                       "pepople_number": 100867,
+                       "avege_number": 10087,
+                       "sales": 19170
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 16,
+                       "pepople_number": 371130,
+                       "avege_number": 23196,
+                       "sales": 103688
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 51,
+                       "pepople_number": 426900,
+                       "avege_number": 8371,
+                       "sales": 500301
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 53,
+                       "pepople_number": 268899,
+                       "avege_number": 5074,
+                       "sales": 333623
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 15,
+                       "pepople_number": 126345,
+                       "avege_number": 8423,
+                       "sales": 21277
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 15,
+                       "pepople_number": 222767,
+                       "avege_number": 14851,
+                       "sales": 97714
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 258,
+                       "pepople_number": 3937592,
+                       "avege_number":15262,
+                       "sales": 2202881
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 477,
+                       "pepople_number": 2677027,
+                       "avege_number": 5612,
+                       "sales": 11159041
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 146,
+                       "pepople_number": 2083919,
+                       "avege_number":14273,
+                       "sales": 637541
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 289,
+                       "pepople_number": 2719548,
+                       "avege_number": 9410,
+                       "sales": 1556336
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 208,
+                       "pepople_number": 1870609,
+                       "avege_number": 8993,
+                       "sales": 3877234
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 248,
+                       "pepople_number": 2756580,
+                       "avege_number": 111119,
+                       "sales": 1284992
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 40,
+                       "pepople_number": 454855,
+                       "avege_number": 11371,
+                       "sales": 122103
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 41,
+                       "pepople_number": 536741,
+                       "avege_number": 13091,
+                       "sales": 166464
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 45,
+                       "pepople_number": 558537,
+                       "avege_number": 12412,
+                       "sales": 134574
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 82,
+                       "pepople_number": 1276543,
+                       "avege_number": 15568,
+                       "sales": 458740
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 37,
+                       "pepople_number": 506157,
+                       "avege_number": 13680,
+                       "sales": 97824
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 40,
+                       "pepople_number": 694984,
+                       "avege_number": 17375,
+                       "sales": 125368
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 29,
+                       "pepople_number": 516918,
+                       "avege_number": 17825,
+                       "sales": 84544
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 89,
+                       "pepople_number": 836179,
+                       "avege_number": 14173,
+                       "sales": 132587
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 43,
+                       "pepople_number": 329415,
+                       "avege_number": 7661,
+                       "sales": 177609
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 9,
+                       "pepople_number": 101456,
+                       "avege_number": 11273,
+                       "sales": 19151
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 16,
+                       "pepople_number": 369851,
+                       "avege_number": 13116,
+                       "sales": 123550
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 53,
+                       "pepople_number": 429443,
+                       "avege_number": 8103,
+                       "sales":497935
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 55,
+                       "pepople_number": 268316,
+                       "avege_number": 4878,
+                       "sales": 328857
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 13,
+                       "pepople_number": 131527,
+                       "avege_number": 10117,
+                       "sales": 18712
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 14,
+                       "pepople_number": 220951,
+                       "avege_number": 15782,
+                       "sales": 94284
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 250,
+                       "pepople_number": 3947652,
+                       "avege_number":15791,
+                       "sales": 1816356
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 462,
+                       "pepople_number": 2668895,
+                       "avege_number": 5777,
+                       "sales": 10322426
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 146,
+                       "pepople_number": 2124901,
+                       "avege_number": 14554,
+                       "sales": 570366
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 288,
+                       "pepople_number": 2742508,
+                       "avege_number": 9523,
+                       "sales": 1555758
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 204,
+                       "pepople_number": 1872150,
+                       "avege_number": 9177,
+                       "sales": 3879382
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 236,
+                       "pepople_number": 2758727,
+                       "avege_number": 11690,
+                       "sales": 1291176
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 43,
+                       "pepople_number": 454177,
+                       "avege_number": 10562,
+                       "sales": 116991
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 65,
+                       "pepople_number": 542170,
+                       "avege_number": 12048,
+                       "sales": 161789
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 49,
+                       "pepople_number": 554734,
+                       "avege_number": 11321,
+                       "sales": 139694
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 82,
+                       "pepople_number": 1274545,
+                       "avege_number": 15543,
+                       "sales": 391964
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 37,
+                       "pepople_number": 501800,
+                       "avege_number": 13562,
+                       "sales": 108283
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 39,
+                       "pepople_number": 690390,
+                       "avege_number":17702,
+                       "sales": 103309
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 26,
+                       "pepople_number": 512570,
+                       "avege_number": 19714,
+                       "sales": 76626
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 58,
+                       "pepople_number": 830302,
+                       "avege_number": 14324,
+                       "sales": 144225
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 43,
+                       "pepople_number": 328398,
+                       "avege_number": 7637,
+                       "sales": 183737
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 9,
+                       "pepople_number": 102324,
+                       "avege_number": 11369,
+                       "sales": 18658
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 17,
+                       "pepople_number": 369750,
+                       "avege_number": 21750,
+                       "sales": 159597
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 49,
+                       "pepople_number": 432957,
+                       "avege_number": 8836,
+                       "sales": 425434
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 54,
+                       "pepople_number": 267819,
+                       "avege_number": 4960,
+                       "sales": 338463
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 13,
+                       "pepople_number": 133881,
+                       "avege_number": 10299,
+                       "sales": 17058
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 13,
+                       "pepople_number": 219348,
+                       "avege_number": 16873,
+                       "sales": 88619
+                   }
+               ],
+        
+        [
+                   {
+                       "region": "新北市",
+                       "COUNTYID": "F",
+                       "number": 237,
+                       "pepople_number": 3957586,
+                       "avege_number":16699,
+                       "sales": 1659942
+       
+                   },
+                   {
+                       "region": "臺北市",
+                       "COUNTYID": "A",
+                       "number": 441,
+                       "pepople_number": 2659140,
+                       "avege_number": 6030,
+                       "sales": 9801031
+       
+                   },
+                   {
+                       "region": "桃園市",
+                       "COUNTYID": "H",
+                       "number": 145,
+                       "pepople_number": 2165687,
+                       "avege_number": 14936,
+                       "sales": 515306
+       
+                   },
+                   {
+                       "region": "台中市",
+                       "COUNTYID": "B",
+                       "number": 285,
+                       "pepople_number": 2763515,
+                       "avege_number": 9697,
+                       "sales": 1414915
+       
+                   },
+                   {
+                       "region": "台南市",
+                       "COUNTYID": "D",
+                       "number": 201,
+                       "pepople_number": 1873411,
+                       "avege_number": 9320,
+                       "sales": 3840184
+       
+                   },
+                   {
+                       "region": "高雄市",
+                       "COUNTYID": "E",
+                       "number": 237,
+                       "pepople_number": 2737613,
+                       "avege_number": 11635,
+                       "sales": 1294916
+       
+                   },
+                   {
+                       "region": "宜蘭縣",
+                       "COUNTYID": "G",
+                       "number": 43,
+                       "pepople_number": 453439,
+                       "avege_number": 10545,
+                       "sales": 102947
+       
+                   },
+                   {
+                       "region": "新竹縣",
+                       "COUNTYID": "J",
+                       "number": 48,
+                       "pepople_number": 547309,
+                       "avege_number": 11403,
+                       "sales": 176784
+       
+                   },
+                   {
+                       "region": "苗栗縣",
+                       "COUNTYID": "K",
+                       "number": 46,
+                       "pepople_number": 550194,
+                       "avege_number": 11961,
+                       "sales": 139773
+       
+                   },
+                   {
+                       "region": "彰化縣",
+                       "COUNTYID": "N",
+                       "number": 76,
+                       "pepople_number": 1270791,
+                       "avege_number": 16721,
+                       "sales": 330059
+       
+                   },
+                   {
+                       "region": "南投縣",
+                       "COUNTYID": "M",
+                       "number": 37,
+                       "pepople_number": 497983,
+                       "avege_number": 13459,
+                       "sales": 101555
+       
+                   },
+                   {
+                       "region": "雲林縣",
+                       "COUNTYID": "P",
+                       "number": 38,
+                       "pepople_number": 686048,
+                       "avege_number": 18054,
+                       "sales": 98281
+       
+                   },
+                   {
+                       "region": "嘉義縣",
+                       "COUNTYID": "Q",
+                       "number": 25,
+                       "pepople_number": 508498,
+                       "avege_number": 20340,
+                       "sales": 75371
+       
+                   },
+                   {
+                       "region": "屏東縣",
+                       "COUNTYID": "T",
+                       "number": 57,
+                       "pepople_number": 825179,
+                       "avege_number": 14477,
+                       "sales": 139041
+       
+                   },
+                   {
+                       "region": "連江縣",
+                       "COUNTYID": "Z",
+                       "number": 0,
+                       "pepople_number": 9660,
+                       "avege_number": 0,
+                       "sales": 0
+                   },
+                   {
+                       "region": "花蓮縣",
+                       "COUNTYID": "U",
+                       "number": 40,
+                       "pepople_number": 327005,
+                       "avege_number": 8175,
+                       "sales": 172675
+       
+                   },
+                   {
+                       "region": "澎湖縣",
+                       "COUNTYID": "X",
+                       "number": 9,
+                       "pepople_number": 103123,
+                       "avege_number": 11458,
+                       "sales": 18265
+                   },
+                   {
+                       "region": "基隆市",
+                       "COUNTYID": "C",
+                       "number": 18,
+                       "pepople_number": 369376,
+                       "avege_number": 20521,
+                       "sales": 150829
+                   },
+                   {
+                       "region": "新竹市",
+                       "COUNTYID": "O",
+                       "number": 50,
+                       "pepople_number": 437037,
+                       "avege_number": 8741,
+                       "sales": 369371
+                   },
+                   {
+                       "region": "嘉義市",
+                       "COUNTYID": "I",
+                       "number": 52,
+                       "pepople_number": 267611,
+                       "avege_number": 5146,
+                       "sales": 327821
+                   },
+                   {
+                       "region": "金門縣",
+                       "COUNTYID": "W",
+                       "number": 13,
+                       "pepople_number": 136299,
+                       "avege_number": 10485,
+                       "sales": 18035
+                   },
+                   {
+                       "region": "台東縣",
+                       "COUNTYID": "V",
+                       "number": 15,
+                       "pepople_number": 218135,
+                       "avege_number": 14542,
+                       "sales": 90729
+                   }
+               ]
+       ]
+       
+;
 
-{
-    "region": "花蓮縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-
-{
-    "region": "好縣",
-    "number": 386,
-    "pepople_number": 3767644,
-    "avege_number": 9761,
-    "sales":2894712
-  
-  },
-
-
-  
-];
-
-var density = {
-    "臺北市": 9952.60,
-    "嘉義市": 4512.66,
-    "新竹市": 4151.27,
-    "基隆市": 2809.27,
-    "新北市": 1932.91,
-    "桃園市": 1692.09,
-    "臺中市": 1229.62,
-    "彰化縣": 1201.65,
-    "高雄市": 942.97,
-    "臺南市": 860.02,
-    "金門縣": 847.16,
-    "澎湖縣": 802.83,
-    "雲林縣": 545.57,
-    "連江縣": 435.21,
-    "新竹縣": 376.86,
-    "苗栗縣": 311.49,
-    "屏東縣": 305.03,
-    "嘉義縣": 275.18,
-    "宜蘭縣": 213.89,
-    "南投縣": 125.10,
-    "花蓮縣": 71.96,
-    "臺東縣": 63.75
-  };
-
-</script>
+        var density97 = {
+            "A": -4, // 台北市
+            "I": -1, //嘉義市
+            "O": 0, //新竹市
+            "C": -14, //基隆市
+            "F": -4, //新北市
+            "H": -2, //桃園市
+            "B": -0, //台中市
+            "N": 4, //彰化縣
+            "E": -2, //高雄市
+            "D": -4, //台南市
+            "W": -15, //金門縣
+            "X": 14, //澎湖縣
+            "P": 4, //雲林縣
+            "Z": 0, //連江縣
+            "J": -6, //新竹縣
+            "K": 9, //苗栗縣
+            "T": 10, //屏東縣
+            "Q": -10, //嘉義縣
+            "G": 0, //宜蘭縣
+            "M": 0, //南投縣
+            "U": 4, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density98 = {
+            "A": -7, // 台北市
+            "I": -6, //嘉義市
+            "O": -10, //新竹市
+            "C": -10, //基隆市
+            "F": -5, //新北市
+            "H": -1, //桃園市
+            "B": 0, //台中市
+            "N": 0, //彰化縣
+            "E": -2, //高雄市
+            "D": -3, //台南市
+            "W": 8, //金門縣
+            "X": 0, //澎湖縣
+            "P": 9, //雲林縣
+            "Z": 0, //連江縣
+            "J": -10, //新竹縣
+            "K": 2, //苗栗縣
+            "T": 8, //屏東縣
+            "Q": -8, //嘉義縣
+            "G": 2, //宜蘭縣
+            "M": -6, //南投縣
+            "U": -4, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density99 = {
+            "A": -8, // 台北市
+            "I": -14, //嘉義市
+            "O": -17, //新竹市
+            "C": -17, //基隆市
+            "F": -9, //新北市
+            "H": -1, //桃園市
+            "B": -3, //台中市
+            "N": -3, //彰化縣
+            "E": -2, //高雄市
+            "D": -5, //台南市
+            "W": 15, //金門縣
+            "X": 0, //澎湖縣
+            "P": 9, //雲林縣
+            "Z": 0, //連江縣
+            "J": -19, //新竹縣
+            "K": -5, //苗栗縣
+            "T": 1, //屏東縣
+            "Q": -6, //嘉義縣
+            "G": -5, //宜蘭縣
+            "M": -6, //南投縣
+            "U": -12, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density100 = {
+            "A": -10, // 台北市
+            "I": -17, //嘉義市
+            "O": -17, //新竹市
+            "C": -31, //基隆市
+            "F": -5, //新北市
+            "H": -7, //桃園市
+            "B": -5, //台中市
+            "N": -1, //彰化縣
+            "E": -2, //高雄市
+            "D": -7, //台南市
+            "W": 8, //金門縣
+            "X": 0, //澎湖縣
+            "P": 13, //雲林縣
+            "Z": 0, //連江縣
+            "J": -18, //新竹縣
+            "K": -9, //苗栗縣
+            "T": -4, //屏東縣
+            "Q": -10, //嘉義縣
+            "G": -13, //宜蘭縣
+            "M": -7, //南投縣
+            "U": -12, //花蓮縣
+            "V": -4 //台東縣
+        };
+        var density101 = {
+            "A": -14, // 台北市
+            "I": -22, //嘉義市
+            "O": -17, //新竹市
+            "C": -34, //基隆市
+            "F": -8, //新北市
+            "H": -4, //桃園市
+            "B": -12, //台中市
+            "N": -1, //彰化縣
+            "E": -6, //高雄市
+            "D": -6, //台南市
+            "W": 31, //金門縣
+            "X": -7, //澎湖縣
+            "P": 13, //雲林縣
+            "Z": 0, //連江縣
+            "J": -25, //新竹縣
+            "K": -8, //苗栗縣
+            "T": -6, //屏東縣
+            "Q": -14, //嘉義縣
+            "G": -13, //宜蘭縣
+            "M": -10, //南投縣
+            "U": -13, //花蓮縣
+            "V": 0 //台東縣
+        };
+        var density102 = {
+            "A": -26, // 台北市
+            "I": -23, //嘉義市
+            "O": -38, //新竹市
+            "C": -48, //基隆市
+            "F": -27, //新北市
+            "H": -26, //桃園市
+            "B": -31, //台中市
+            "N": -29, //彰化縣
+            "E": -19, //高雄市
+            "D": -14, //台南市
+            "W": 8, //金門縣
+            "X": -29, //澎湖縣
+            "P": -16, //雲林縣
+            "Z": 0, //連江縣
+            "J": -43, //新竹縣
+            "K": -23, //苗栗縣
+            "T": -27, //屏東縣
+            "Q": -36, //嘉義縣
+            "G": -24, //宜蘭縣
+            "M": -41, //南投縣
+            "U": -27, //花蓮縣
+            "V": -41 //台東縣
+        };
+        var density103 = {
+            "A": -30, // 台北市
+            "I": -23, //嘉義市
+            "O": -42, //新竹市
+            "C": -45, //基隆市
+            "F": -28, //新北市
+            "H": -33, //桃園市
+            "B": -31, //台中市
+            "N": -33, //彰化縣
+            "E": -22, //高雄市
+            "D": -18, //台南市
+            "W": 15, //金門縣
+            "X": -29, //澎湖縣
+            "P": -20, //雲林縣
+            "Z": 0, //連江縣
+            "J": -39, //新竹縣
+            "K": -28, //苗栗縣
+            "T": -27, //屏東縣
+            "Q": -40, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -34, //花蓮縣
+            "V": -44 //台東縣
+        };
+        var density104 = {
+            "A": -30, // 台北市
+            "I": -20, //嘉義市
+            "O": -40, //新竹市
+            "C": -45, //基隆市
+            "F": -33, //新北市
+            "H": -33, //桃園市
+            "B": -34, //台中市
+            "N": -32, //彰化縣
+            "E": -21, //高雄市
+            "D": -17, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -27, //雲林縣
+            "Z": 0, //連江縣
+            "J": -39, //新竹縣
+            "K": -31, //苗栗縣
+            "T": -23, //屏東縣
+            "Q": -42, //嘉義縣
+            "G": -27, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -36, //花蓮縣
+            "V": -48 //台東縣
+        };
+        var density105 = {
+            "A": -32, // 台北市
+            "I": -22, //嘉義市
+            "O": -44, //新竹市
+            "C": -41, //基隆市
+            "F": -35, //新北市
+            "H": -33, //桃園市
+            "B": -34, //台中市
+            "N": -32, //彰化縣
+            "E": -25, //高雄市
+            "D": -19, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -29, //雲林縣
+            "Z": 0, //連江縣
+            "J": -33, //新竹縣
+            "K": -25, //苗栗縣
+            "T": -25, //屏東縣
+            "Q": -48, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -36, //花蓮縣
+            "V": -52 //台東縣
+        };
+        var density106 = {
+            "A": -35, // 台北市
+            "I": -25, //嘉義市
+            "O": -43, //新竹市
+            "C": -38, //基隆市
+            "F": -39, //新北市
+            "H": -34, //桃園市
+            "B": -35, //台中市
+            "N": -37, //彰化縣
+            "E": -25, //高雄市
+            "D": -20, //台南市
+            "W": 0, //金門縣
+            "X": -36, //澎湖縣
+            "P": -31, //雲林縣
+            "Z": 0, //連江縣
+            "J": -28, //新竹縣
+            "K": -29, //苗栗縣
+            "T": -26, //屏東縣
+            "Q": -50, //嘉義縣
+            "G": -22, //宜蘭縣
+            "M": -46, //南投縣
+            "U": -40, //花蓮縣
+            "V": -44 //台東縣
+        };
+    </script>
 
 
 </body>
 <script>
-    jQuery(function() {
+    jQuery(function () {
         var width = 800,
             height = 600;
-
-        var svg = d3.select("body").append("svg")
-            // .attr("class", "svgback")
+        var svg = d3.select("body")
+            .append("svg")
             .attr("width", width)
             .attr("height", height);
-
         var projection = d3.geo.mercator()
-            .center([121, 24])
+            .center([122.5, 24])
             .scale(6000);
 
         var path = d3.geo.path()
             .projection(projection);
 
-        d3.json("taiwan.json", function(error, topology) {
-            console.log(topology);
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+        //畫出起始圖
+        d3.json("taiwan.json", function (error, topology) {
             var g = svg.append("g");
-
             // 縣市/行政區界線
             d3.select("svg").append("path").datum(
                 topojson.mesh(topology,
                     topology.objects["County_MOI_1060525"],
-                    function(a,
+                    function (a,
                         b) {
                         return a !== b;
                     })).attr("d", path).attr("class", "subunit-boundary");
@@ -233,32 +2493,556 @@ var density = {
                 .data(topojson.feature(topology, topology.objects.County_MOI_1060525).features)
                 .enter()
                 .append("path")
+                .attr("class", "state-path")
                 .attr("d", path)
                 .attr({
                     d: path,
-                    name: function(d) {
+                    name: function (d) {
                         return d.properties["COUNTYNAME"];
-
-
-
                     },
-                    fill: '#fff',
-                    stroke: "#227700"
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density97[d.properties.COUNTYID]);
+                    },
+                    stroke: "black"
+                }).attr('stroke-width', "1")
+                .on("mouseover", function (d) {
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    let k=0;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME   + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
 
 
-
-
-
-                }).attr('stroke-width', "2")
-                .on("mouseover", function(d) {
-                    d3.select(this).attr("fill", "#227700");
-                    document.alert(6);
-
-                }).on("mouseleave", function(d) {
-                    d3.select(this).attr("fill", "#fff");
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
                 });
+            //帶入不同年代的資料
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density98[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(2000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density99[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(4000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density100[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(6000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density101[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(8000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density102[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(10000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density103[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(12000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density104[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(14000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density105[d.properties.COUNTYID]);
+                    }
+                });
+            d3.select("g").selectAll("path")
+                .transition()
+                .delay(16000)
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density106[d.properties.COUNTYID]);
+                    }
+                });
+
+            //產生滑軸
+            d3.select("body").append("div").attr("class", "slider1")
+                .append("input")
+                .attr("type", "range")
+                .attr("id", "slider")
+                .attr("min", "97")
+                .attr("max", "106")
+                .attr("step", "null")
+                .attr("mark", "{number:97,98,99,100,101,102,103,104,105,106}")
+                .attr("oninput", "change()");
+            var count = 97
+            for (count = 97; count < 107; count++) {
+                d3.select(".slider1")
+                    .append("span")
+                    .html(count);
+            }
+
         });
+
     })
+
+    function change() {
+        var year = document.getElementById('slider').value;
+        var projection = d3.geo.mercator()
+            .center([122.5, 24])
+            .scale(6000);
+        var path = d3.geo.path()
+            .projection(projection);
+        var tooltip = d3.selectAll(".toolTip");
+            
+        if (year == 97) {
+             d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density97[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=1;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+        } else if (year == 98) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density98[d.properties.COUNTYID]);
+                    }
+                });
+
+               d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=2;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME  + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 99) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density99[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=3;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME  + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+                
+                
+        } else if (year == 100) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density100[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=4;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 101) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density101[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=5;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 102) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density102[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=6;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 103) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density103[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=7;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 104) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density104[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=8;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME  + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 105) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density105[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=9;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME + "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        } else if (year == 106) {
+            d3.select("g").selectAll("path")
+                .transition()
+                .duration(2000)
+                .attr({
+                    d: path,
+                    fill: function (d) {
+                        var color = d3.scale.linear()
+                            .domain([-50, 0, 15])
+                            .range(["red", "white", "green"]);
+                        return color(density106[d.properties.COUNTYID]);
+                    }
+                });
+                d3.select("g").selectAll("path")
+                .on("mouseover", function (d) {
+                    console.log(2222);
+                    //d3.select(this).attr("fill", "#227700");
+                    tooltip.transition().duration(10).style("opacity", 1);
+                    let i;
+                    k=10;
+                    for (i = 0; i < data96[k].length; i++) {
+                        if (d.properties.COUNTYID == data96[k][i].COUNTYID) {
+
+                            tooltip.html(d.properties.COUNTYNAME +  "<br> 書店數目： " + data96[k][i].number +
+                                    "<br> 縣市人口數：" + data96[k][i].pepople_number + "<br>平均多少人享有一間書店： " +
+                                    data96[k][i].avege_number + "<br> 銷售總額：" + data96[k][i].sales)
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        }
+
+
+                    }
+                }).on("mouseleave", function (d) {
+                    //d3.select(this).attr("fill", "#fff");
+                    tooltip.transition().duration(500).style("opacity", 0);
+                }); 
+        }
+
+    };
 </script>
 
 </html>
